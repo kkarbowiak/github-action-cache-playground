@@ -1,0 +1,37 @@
+name: Build app
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+runs:
+  steps:
+    - uses: actions/checkout@v3
+
+    - name: Install libs
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt install libcurl4-openssl-dev
+
+    - name: CMake configure, build, and install aws-lambda-cpp
+      shell: bash
+      run: |
+        cd thirdparty/aws-lambda-cpp
+        mkdir build
+        cd build
+        cmake .. -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=~/aws-lambda-install
+        make -j2
+        make install
+
+    - name: CMake configure, build, and package lambda
+      shell: bash
+      run: |
+        cd app-lambda
+        mkdir build
+        cd build
+        cmake .. -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=~/aws-lambda-install
+        cmake --build . -j2
+        make aws-lambda-package-app-lambda
