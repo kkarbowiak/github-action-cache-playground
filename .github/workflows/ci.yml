@@ -44,7 +44,7 @@ jobs:
       - name: Install aws-lambda-cpp
         shell: bash
         run: |
-          touch thirdparty/aws-lambda-cpp/build
+          touch -c thirdparty/aws-lambda-cpp/build/*
           cd thirdparty/aws-lambda-cpp/build
           make install
 
