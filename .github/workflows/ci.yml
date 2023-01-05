@@ -28,10 +28,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: thirdparty/aws-lambda-cpp/build
+          path: ~/aws-lambda-install
           key: aws-lambda-cpp-${{ env.aws-lambda-cpp-tag }}
 
-      - name: CMake configure and build aws-lambda-cpp
+      - name: CMake configure, build, and install aws-lambda-cpp
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
@@ -40,12 +40,6 @@ jobs:
           cd build
           cmake .. -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=~/aws-lambda-install
           make -j2
-
-      - name: Install aws-lambda-cpp
-        shell: bash
-        run: |
-          touch -c thirdparty/aws-lambda-cpp/build/*
-          cd thirdparty/aws-lambda-cpp/build
           make install
 
       - name: CMake configure, build, and package lambda
