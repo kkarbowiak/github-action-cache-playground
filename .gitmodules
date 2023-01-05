@@ -1,0 +1,3 @@
+[submodule "thirdparty/aws-lambda-cpp"]
+	path = thirdparty/aws-lambda-cpp
+	url = https://github.com/awslabs/aws-lambda-cpp.git
