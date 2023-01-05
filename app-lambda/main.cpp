@@ -3,7 +3,7 @@
 
 auto handler(aws::lambda_runtime::invocation_request const & /* request */) -> aws::lambda_runtime::invocation_response
 {
-    return aws::lambda_runtime::invocation_response::success(R"({"result":"success","size\:"great"})", "application/json");
+    return aws::lambda_runtime::invocation_response::success(R"({"result":"success","size":"great"})", "application/json");
 }
 
 auto main() -> int
