@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  aws-lambda-cpp-tag: v0.2.6
+  aws-lambda-cpp-tag: v0.2.7
 
 jobs:
   build:
