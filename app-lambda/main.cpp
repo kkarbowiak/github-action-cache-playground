@@ -9,5 +9,6 @@ auto handler(aws::lambda_runtime::invocation_request const & /* request */) -> a
 auto main() -> int
 {
     aws::lambda_runtime::run_handler(handler);
+
     return 0;
 }
