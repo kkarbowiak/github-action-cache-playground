@@ -45,6 +45,7 @@ jobs:
         shell: bash
         run: |
           cd thirdparty/aws-lambda-cpp/build
+          touch .
           make install
 
       - name: CMake configure, build, and package lambda
