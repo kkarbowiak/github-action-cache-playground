@@ -32,7 +32,7 @@ jobs:
           key: aws-lambda-cpp-${{ env.aws-lambda-cpp-tag }}
 
       - name: CMake configure and build aws-lambda-cpp
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           cd thirdparty/aws-lambda-cpp
