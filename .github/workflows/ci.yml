@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+env:
+  aws-lambda-cpp-tag: v0.2.6
+
 jobs:
   build:
     name: "Ubuntu 22.04 G++"
@@ -21,7 +24,15 @@ jobs:
           sudo apt-get update
           sudo apt install libcurl4-openssl-dev
 
+      - name: Cache aws-lambda-cpp
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: thirdparty/aws-lambda-cpp/build
+          key: aws-lambda-cpp-${{ env.aws-lambda-cpp-tag }}
+
       - name: CMake configure and build aws-lambda-cpp
+        if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
         run: |
           cd thirdparty/aws-lambda-cpp
